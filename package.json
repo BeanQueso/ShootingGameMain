@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aframe-broadcast-component": "^0.1.0",
+    "firebase": "^10.3.1"
+  }
+}

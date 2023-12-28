@@ -1,0 +1,61 @@
+h1{
+    text-align:center;
+    color:rgb(255, 255, 255);
+    position: fixed;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body{
+    background-image: url(./images/metal.jpg);
+    background-position:center;
+    background-repeat: repeat;
+    background-size:60%;
+    position:fixed;
+}
+
+#freeRoamButton{
+    border-radius:30px;
+    width:150px;
+    height:140;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left:3px;
+}
+
+#freeRoamButton:hover{
+    transition:background-color 0.5s;
+    transition:color 0.5s;
+    background-color: rgb(93, 93, 93);
+    color:white;
+}
+
+#freeRoamButton:not(:hover){
+    transition:color 0.5s;
+    transition:background-color 0.5s;
+    background-color: rgb(246, 245, 245);
+    color:rgb(0, 0, 0);
+}
+
+#FRDC{
+    background-color: rgb(245, 245, 245);
+    width:160px;
+    height:90px;
+    border-radius:20px;
+    margin-top:10px;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:-4px;
+    border:4px dashed rgb(112, 112, 112);
+    border-style:outset;
+}
+
+.FRDclass p{
+    font-size: 11px;
+    margin-left:10px;
+    font-family: 'Courier New', Courier, monospace;
+}

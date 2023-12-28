@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mapped freeroam</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+  <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+  <script src="../components/Bullets.js"></script>
+  <script src="../components/AimDownSight.js"></script>
+  <script src="../components/PlaySound.js"></script>
+  <script src="../components/createObjects.js"></script>
+  <script src="../components/WeaponBobbing.js"></script>
+  <script src="../components/ReturnToMainMenu.js"></script>
+  <script type="module" src="../components/spawnPlayers.js"></script>
+  <script src="https://unpkg.com/aframe-firebase-component@^4.0.0/dist/aframe-firebase-component.min.js"></script> 
+
+</head>
+
+<body>
+  <a-scene id="scene" inspector-plugin-recast inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js" firebase="apiKey: AIzaSyD0YbYs3VN_7Mm_aiVLzerryHTPV6NyenY;
+  authDomain: shootinggame-99adc.firebaseapp.com;
+  databaseURL: https://shootinggame-99adc-default-rtdb.firebaseio.com;
+  storageBucket: shootinggame-99adc.appspot.com" spawn-players>
+    <a-sky color="skyblue"></a-sky>
+
+    <!--Assets-->
+    <a-assets>
+      <a-asset-item id="shooter" src="../models/shooter/gun.gltf"></a-asset-item>
+      <a-asset-item id="character-asset" src="../models/character.glb"></a-asset-item>
+
+      <audio id="shoot" src="../sounds/bullet.mp3"></audio>
+      <audio id="footstep" src="../sounds/footStep.mp3"></audio>
+      <audio id="empty" src="../sounds/empty.mp3"></audio>
+      <audio id="reload" src="../sounds/reload.mp3"></audio>
+      <audio id="grenade" src="../sounds/grenade.mp3"></audio>
+      <audio id="grenadeReload" src="../sounds/grenadeReload.m4a"></audio>
+    </a-assets>
+
+
+    <a-entity id="sound1" sound="src: #shoot; poolSize:30; autoplay: false; volume: 1; loop:false; positional:false">
+    </a-entity>
+
+    <a-entity id="sound2" sound="src: #footstep; poolSize:1; autoplay:false; volume:0.3; loop:true; positional:false">
+    </a-entity>
+
+    <a-entity id="sound3" sound="src: #empty; poolSize:7; autoplay:false; volume:0.5; positional:false"></a-entity>
+
+    <a-entity id="sound4" sound="src:#reload; poolSize:1; autoplay:false; volume:0.5; positional:false"></a-entity>
+
+    <a-entity id="sound5" sound="src:#grenade; poolSize:4; autoplay:false; volume:0.1; positional:false"></a-entity>
+
+    <a-entity id="sound6" sound="src:#grenadeReload; poolSize:1; autoplay:false; volume:0.5; positional:false">
+    </a-entity>
+    <!--Light-->
+    <a-entity light="type:ambient; intensity:0.5"></a-entity>
+    <!--Directional light-->
+    <a-entity animation="property:rotation; to:0 360 0; easing:linear; loop:true; dur:60000">
+      <a-entity light="type:directional; castShadow:true; intensity:1; distance:50; decay:2; color:yellow"
+        position="-100 18 20"></a-entity>
+    </a-entity>
+
+    <!--Camera and Cursor-->
+    <a-entity id="camera" camera="active:true" weapon-bobbing position="0 1.6 0" wasd-controls="acceleration: 100"
+      look-controls="pointerLockEnabled: enabled" rotation="0 -100 0" dynamic-body="mass:0" switch createobjects>
+
+      <a-entity id="room-title" position="-5.4 4 -5"
+        text="font: mozillavr; align: center; width: 10; color: black; value: Mapped Free Roam."></a-entity>
+
+      <a-entity id="direction" position="-6.47 3.5 -5"
+        text="font: mozillavr; align: center; width: 6; color: black; value: 'm' to return."></a-entity>
+
+      <a-entity id="weapon" gltf-model="#shooter" position="0.1 -0.1 -0.16" rotation="0 180 0" scale="0.025 0.025 0.04"
+        aimdownsight play-sounds return-to-main-menu shadow = "cast:true; receive:false"></a-entity>
+      <a-entity id="character" gltf-model="#character-asset" scale="0.03 0.03 0.03" position="-0.15 -1 0.6"
+        rotation="0 180 0" dynamic-body="mass:0" shadow = "cast:true; receive:false">
+
+      </a-entity>
+      <a-box id="cross1" width="0.005" height="0.03" depth="0.002" color="white" position="0 0 -1" shadow = "cast:true; receive:false"></a-box>
+      <a-box id="cross2" width="0.030" height="0.005" depth="0.002" color="white" position="0 0 -1" shadow = "cast:true; receive:false"></a-box>
+
+
+    </a-entity>
+
+    <!--Bullets-->
+    <a-entity bullets></a-entity>
+
+    <!--Ground-->
+
+    <a-box class="other" id="testBox" position="0 0.5 -6" dynamic-body src="../images/crate.png" shadow = "cast:true; receive:false"></a-box>
+    <a-plane id="ground2" position="0 0 0" rotation="-90 0 0" height="100" width="100"
+      dynamic-body="mass:0" visible="true" shadow = "receive:true" color = "green" src = "../images/groundtexture.jpeg">
+    </a-plane>
+
+    <!--Boxes-->
+  </a-scene>
+</body>
+
+</html>

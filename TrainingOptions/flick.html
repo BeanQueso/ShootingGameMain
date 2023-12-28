@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mapped freeroam</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="../components/Bullets.js"></script>
+    <script src="../components/AimDownSight.js"></script>
+    <script src="../components/PlaySound.js"></script>
+    <script src="../components/createObjects.js"></script>
+    <script src="../components/WeaponBobbing.js"></script>
+    <script src="../components/ReturnToMainMenu.js"></script>
+    <script src="../components/handleOrbs.js"></script>
+</head>
+
+<body>
+    <a-scene id="scene" inspector-plugin-recast handle-orbs>
+        <a-sky src = "../images/metal.jpg"></a-sky>
+
+        <a-camera id = "camera" look-controls = "pointerLockEnabled:true" wasd-controls = "enabled:false" >
+            <a-cursor></a-cursor>
+        </a-camera>
+
+        <a-box position = "0 1 -6" width = "7" height = "6" src = "../images/groundtexture.jpeg"></a-box>
+
+        <a-plane id="ground2" position="0 0 0" rotation="-90 0 0" height="100" width="100" dynamic-body="mass:0"
+            visible="true" shadow="receive:true" color="grey" src = "../images/metal.jpg">
+        </a-plane>
+    </a-scene>
+</body>
+
+</html>

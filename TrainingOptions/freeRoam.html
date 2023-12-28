@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shooting Game in Virtual Reality</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    
+    <script src = "../components/Bullets.js"></script>
+    <script src = "../components/AimDownSight.js"></script>
+    <script src = "../components/PlaySound.js"></script>
+    <script src = "../components/createObjects.js"></script>
+    <script src = "../components/WeaponBobbing.js"></script>
+    <script src = "../components/ReturnToMainMenu.js"></script>
+    
+  </head>
+  <body>
+    <a-scene id="scene" inspector-plugin-recast>
+      <a-sky color = "skyblue"></a-sky>
+
+      <a-entity id="environment" environment="preset: egypt; skyType:gradient; lighting:point">
+    </a-entity>
+
+      <!--Assets-->
+      <a-assets>
+        <a-asset-item id = "shooter" src = "../models/shooter/gun.gltf"></a-asset-item>
+        <a-asset-item id = "terrain" src = "../models/terrain/scene.gltf"></a-asset-item>
+        <a-asset-item id = "terrain-main" src = "../models/terrain_main/scene.gltf"></a-asset-item>
+        <a-asset-item id = "character-asset" src = "../models/character.glb"></a-asset-item>
+        
+        <audio id="shoot" src="../sounds/bullet.mp3"></audio>
+        <audio id="footstep" src="../sounds/footStep.mp3"></audio>
+      </a-assets>
+
+
+      <a-entity id="sound1" sound="src: #shoot; poolSize:20; autoplay: false; volume: 1; loop:false; positional:false"></a-entity>
+
+      <a-entity id="sound2" sound = "src: #footstep; poolSize:1; autoplay:false; volume:0.3; loop:true; positional:false"></a-entity>
+      
+      <!--Light-->
+      <a-entity light="type: ambient; color: yellow; intensity:-10"></a-entity>
+      <a-entity light="type: ambient; color: yellow; intensity:10"></a-entity>
+
+      <!--Camera and Cursor-->
+      <a-entity
+        id="camera"
+        camera = "active:true"
+        position="16.9 1.6 20"
+        wasd-controls = "acceleration: 100"
+        look-controls="pointerLockEnabled: enabled" 
+        rotation = "0 -100 0"
+        dynamic-body = "mass:0"
+      >
+
+      <a-entity
+        id="room-title"
+        position="-6.14 4 -5"
+        text="font: mozillavr; align: center; width: 10; color: black; value: Free Roam."
+      ></a-entity>
+
+      <a-entity
+        id="direction"
+        position="-6.47 3.5 -5"
+        text="font: mozillavr; align: center; width: 6; color: black; value: 'm' to return."
+      ></a-entity>
+        
+      <a-entity id = "weapon" gltf-model = "#shooter" position = "0.1 -0.1 -0.16" rotation = "0 0 0" scale = "0.001 0.001 0.001" light = "type: ambient; intensity: 3;" aimdownsight play-sounds createobjects return-to-main-menu></a-entity>
+        <a-entity id = "character" gltf-model = "#character-asset" scale = "0.03 0.03 0.03" position = "-0.15 -1 0.6" rotation = "0 180 0">
+
+        </a-entity>
+        <a-cursor id = "maincursor" >
+          <a-image src = "../images/crosshairmain.png" scale = "0.2 0.2 0.2" rotation = "0 0 0" id = "crosshairimage"></a-image>
+        </a-cursor>   
+
+      </a-entity>
+
+      </a-entity>
+
+      <!--Bullets-->
+      <a-entity bullets></a-entity>
+
+      <!--Ground-->
+      <a-plane
+        id="ground"
+        position="0 -1 0"
+        rotation="0 0 0"
+        height="500"
+        width="500"
+        static-body
+        visible="true"
+        gltf-model = "#terrain-main"
+      >
+      </a-plane>
+
+      <a-plane id="ground2" repeat="5 5" position="0 0 0" rotation="-90 0 0" height="57.6" width="57.6" color="#FBF2D4"
+      dynamic-body = "mass:0" visible="false">
+    </a-plane>
+
+      <!--Boxes-->
+      <a-box position="15.3 1.1 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+
+      <a-box position="16.9 1.1 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+
+      <a-box position="18.5 1.1 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+
+      <a-box position="16.2 2.15 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+
+      <a-box position="17.7 2.15 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+
+      <a-box position="16.9 3.2 10" color="#2B0601" depth="1" height="1" width="1" dynamic-body = "mass:5"></a-box>
+    </a-scene>
+  </body>
+</html>
